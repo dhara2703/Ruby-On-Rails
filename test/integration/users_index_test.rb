@@ -4,8 +4,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
   def setup
     @admin     = users(:michael)
     @non_admin = users(:archer)
-    @user      = users(:lana)
-
+    # @user      = users(:lana)
   end
 
   test "index as admin including pagination and delete links" do
@@ -32,7 +31,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
   end
 
   test "index including pagination" do
-    log_in_as(@user)
+    log_in_as(@non_admin)
     get users_path
     assert_template 'users/index'
     assert_select 'div.pagination'
