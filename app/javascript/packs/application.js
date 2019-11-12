@@ -5,6 +5,7 @@
 
 //= require jquery
 //= require bootstrap
+//= require_tree 
 
 require("@rails/ujs").start()
 require("turbolinks").start()

@@ -10,6 +10,11 @@ class UserTest < ActiveSupport::TestCase
     assert @user.valid?
   end
 
+  test "name should be present" do
+    @user.name = "     "
+    assert_not @user.valid?
+  end
+
   test "email should be present" do
     @user.email = "     "
     assert_not @user.valid?
@@ -42,7 +47,7 @@ class UserTest < ActiveSupport::TestCase
       assert_not @user.valid?, "#{invalid_address.inspect} should be invalid"
     end
   end
- 
+
   test "email addresses should be unique" do
     duplicate_user = @user.dup
     duplicate_user.email = @user.email.upcase
@@ -67,7 +72,9 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
-  test "authenticated? should return false for a user with nil digest" do
-    assert_not @user.authenticated?('')
+ test "authenticated? should return false for a user with nil digest" do
+    assert_not @user.authenticated?(:remember, '')
   end
+
+  
 end
